@@ -24,7 +24,7 @@ exports.createPost = async (req, res) => {
 };
 
 //PUBLIC: Get all published posts
-exports.getPublishedPoss = async (req, res) => {
+exports.getPublishedPosts = async (req, res) => {
     try {
         const posts = await prisma.post.findMany({
             where: { published: true },
