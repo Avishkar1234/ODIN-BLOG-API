@@ -1,3 +1,4 @@
+const { json } = require("express");
 const prisma = require("../config/prisma");
 
 exports.createPost = async (req, res) => {
@@ -48,6 +49,70 @@ exports.getAllPosts = async (req, res) => {
         });
 
         res.json(posts);
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+//ADMIN: Toggle publish status
+exports.togglePublish = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await prisma.post.findUnique({
+            where: { id: Number(id) },
+        });
+
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        const updatedPost = await prisma.post.update({
+            where: { id: Number(id) },
+            data: {
+                published: !post.published,
+            },
+        });
+
+        res.json(updatedPost);
+
+    } catch (error) {
+        res.status(500),json({ message: "Server error"});
+    }
+};
+
+//ADMIN: Update post
+exports.updatePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, content } = req.body;
+
+        const updatedPost = await prisma.post.update({
+            where: { id: Number(id) },
+            data: {
+                title,
+                content,
+            }
+        });
+
+        res.json(updatedPost);
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+//ADMIN: Delete post
+exports.deletePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await prisma.post.delete({
+            where: { id: Number(id) },
+        });
+
+        res.json({ message: "Post deleted" });
 
     } catch (error) {
         res.status(500).json({ message: "Server error" });
