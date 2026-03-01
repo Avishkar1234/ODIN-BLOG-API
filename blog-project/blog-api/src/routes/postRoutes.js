@@ -26,7 +26,7 @@ router.put(
 );
 
 router.delete(
-    ":/id",
+    "/:id",
     authenticateToken,
     authorizeAdmin,
     postController.deletePost
