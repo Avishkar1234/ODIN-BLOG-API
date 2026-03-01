@@ -12,7 +12,7 @@ router.post(
 
 // Delete comment
 router.delete(
-    "/comments:/id",
+    "/comments/:id",
     authenticateToken,
     commentController.deleteComment
 );

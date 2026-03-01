@@ -118,3 +118,31 @@ exports.deletePost = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
+
+// PUBLIC: Get single published post with comments
+exports.getSinglePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await prisma.post.findUnique({
+            where: { id: Number(id) },
+            include: {
+                author: true,
+                comments: {
+                    include: {
+                        author: true,
+                    },
+                },
+            },
+        });
+
+        if (!post || !post.published) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        res.json(post);
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+};
