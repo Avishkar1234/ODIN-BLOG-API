@@ -16,7 +16,7 @@ exports.createComment = async (req, res) => {
 
         if (!post || !post.published) {
             return res.status(404).json({ message: "Post not available" });
-        };
+        }
 
         const comment = await prisma.comment.create({
             data: {
@@ -34,7 +34,7 @@ exports.createComment = async (req, res) => {
 };
 
 // ADMIN or OWNER: Delete comment
-exports.deleteComment = async (req, res) {
+exports.deleteComment = async (req, res) => {
     try {
         const { id } = req.params; // commentId
 
@@ -56,8 +56,10 @@ exports.deleteComment = async (req, res) {
 
         await prisma.comment.delete({
             where: { id: Number(id) },
-        })
+        });
+
+        res.json({ message: "Comment deleted" });
     } catch (error) {
-        
+        res.status(500).json({ message: "Server error" });
     }
-}
+};
