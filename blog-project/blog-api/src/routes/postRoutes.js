@@ -6,6 +6,7 @@ const authorizeAdmin = require("../middleware/authorizeAdmin");
 
 //Public
 router.get("/", postController.getPublishedPosts);
+router.get("/:id", postController.getSinglePost);
 
 //Admin
 router.get("/all", authenticateToken, authorizeAdmin, postController.getAllPosts);

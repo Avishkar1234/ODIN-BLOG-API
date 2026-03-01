@@ -31,7 +31,12 @@ exports.getPublishedPosts = async (req, res) => {
             where: { published: true },
             include: {
                 author: true,
-            }
+                comments: {
+                    include: {
+                        author: true,
+                    },
+                },
+            },
         });
 
         res.json(posts);
