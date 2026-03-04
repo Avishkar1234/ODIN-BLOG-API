@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     //Load user from token on app start
     useEffect(() => {
@@ -14,6 +15,8 @@ function AuthProvider({ children }) {
         if (token) {
             API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             fetchCurrentUser();
+        } else {
+            setLoading(false);
         }
     }, []);
 
@@ -24,6 +27,8 @@ function AuthProvider({ children }) {
         } catch (err) {
             console.error("Auth error:", err);
             logout();
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -40,7 +45,7 @@ function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     )
