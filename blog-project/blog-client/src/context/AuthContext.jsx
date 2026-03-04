@@ -1,6 +1,6 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
-import { locals } from "../../../blog-api/src/app";
+import API from "../api/axios"
 
 export const AuthContext = createContext();
 
