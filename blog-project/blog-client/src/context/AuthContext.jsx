@@ -19,7 +19,7 @@ function AuthProvider({ children }) {
 
     const fetchCurrentUser = async () => {
         try {
-            const res = await API.get("/me"); // make sure your backend has this route
+            const res = await API.get("/api/auth/me"); // make sure your backend has this route
             setUser(res.data);
         } catch (err) {
             console.error("Auth error:", err);
