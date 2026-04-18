@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from "../api/axios";
 import { Link } from "react-router-dom";
+import "../styles/Home.css";
 
 function Home() {
   const [posts, setPosts] = useState([]);

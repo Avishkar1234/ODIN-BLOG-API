@@ -1,0 +1,49 @@
+.create-post {
+  max-width: 680px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.create-post h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 1.75rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.create-post-form textarea {
+  min-height: 220px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.btn-submit {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.btn-submit:hover {
+  background-color: #1d4ed8;
+}
+
+.form-success {
+  color: #16a34a;
+  font-size: 0.875rem;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 0.875rem;
+}
