@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import API from "../api/axios";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
+import React from "react";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -14,7 +15,6 @@ function Home() {
         const res = await API.get("/api/posts");
         setPosts(res.data);
       } catch (err) {
-        console.error(err);
         setError(err.response?.data?.message || "Failed to load posts");
       } finally {
         setLoading(false);
@@ -45,13 +45,11 @@ function Home() {
             }}
           >
             <h3>{post.title}</h3>
-
             <p>
               {post.content
                 ? post.content.slice(0, 120) + "..."
                 : "No content available"}
             </p>
-
             <Link to={`/post/${post.id}`}>Read More</Link>
           </div>
         ))

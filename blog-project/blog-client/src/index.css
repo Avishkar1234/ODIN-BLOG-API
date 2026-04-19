@@ -1,9 +1,17 @@
+/* Reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Base styles */
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
@@ -14,6 +22,7 @@ body {
   font-size: 16px;
 }
 
+/* Links */
 a {
   color: #2563eb;
   text-decoration: none;
@@ -23,6 +32,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Buttons */
 button {
   cursor: pointer;
   font-family: inherit;
@@ -40,6 +50,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Inputs */
 input,
 textarea {
   font-family: inherit;
@@ -56,4 +67,19 @@ input:focus,
 textarea:focus {
   outline: none;
   border-color: #2563eb;
+}
+
+/* ✅ Reusable page container (for dashboard, create page, etc.) */
+.app-container {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ✅ Optional: headings consistency */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  color: #111;
 }

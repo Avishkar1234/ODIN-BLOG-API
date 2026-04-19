@@ -4,11 +4,10 @@ const postController = require("../controllers/postController");
 const authenticateToken = require("../middleware/authMiddleware");
 const authorizeAdmin = require("../middleware/authorizeAdmin");
 
-//Public
-router.get("/:id", postController.getSinglePost);
+// Public
 router.get("/", postController.getPublishedPosts);
 
-//Admin
+// Admin — must be before /:id
 router.get(
   "/all",
   authenticateToken,
@@ -23,19 +22,20 @@ router.patch(
   authorizeAdmin,
   postController.togglePublish,
 );
-
 router.put(
   "/:id",
   authenticateToken,
   authorizeAdmin,
   postController.updatePost,
 );
-
 router.delete(
   "/:id",
   authenticateToken,
   authorizeAdmin,
   postController.deletePost,
 );
+
+// Parameterized — must come last
+router.get("/:id", postController.getSinglePost);
 
 module.exports = router;

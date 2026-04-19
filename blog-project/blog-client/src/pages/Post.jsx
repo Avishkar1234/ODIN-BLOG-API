@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import API from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
@@ -38,10 +38,9 @@ function Post() {
         content: comment,
       });
 
-      // Add new comment to UI instantly
       setPost((prev) => ({
         ...prev,
-        comments: [...prev.comments, res.data],
+        comments: [...(prev.comments ?? []), res.data],
       }));
 
       setComment("");
@@ -64,16 +63,16 @@ function Post() {
 
       <h3>Comments</h3>
 
-      {post.comments.length === 0 && <p>No comments yet</p>}
+      {(post.comments ?? []).length === 0 && <p>No comments yet</p>}
 
-      {post.comments.map((c) => (
+      {(post.comments ?? []).map((c) => (
         <div key={c.id} style={{ marginBottom: "1rem" }}>
-          <strong>{c.author.username}</strong>
+          <strong>{c.author?.username ?? "Anonymous"}</strong>
           <p>{c.content}</p>
         </div>
       ))}
 
-      {user && (
+      {user ? (
         <form onSubmit={handleCommentSubmit} style={{ marginTop: "1rem" }}>
           <textarea
             placeholder="Write a comment..."
@@ -82,14 +81,13 @@ function Post() {
             rows={3}
             style={{ width: "100%" }}
           />
-
           <button type="submit" disabled={loadingComment}>
             {loadingComment ? "Posting..." : "Add Comment"}
           </button>
         </form>
+      ) : (
+        <p>Login to add a comment</p>
       )}
-
-      {!user && <p>Login to add a comment</p>}
     </div>
   );
 }
