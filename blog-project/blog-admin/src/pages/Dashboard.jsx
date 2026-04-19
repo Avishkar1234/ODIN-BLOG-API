@@ -68,7 +68,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="dashboard-header">
         <h2>Admin Dashboard</h2>
-        <button className="btn-new" onClick={() => navigate("/create")}>
+        <button className="btn btn-new" onClick={() => navigate("/create")}>
           + New Post
         </button>
       </div>
@@ -78,31 +78,26 @@ function Dashboard() {
       ) : (
         posts.map((post) => {
           const isProcessing = processingId === post.id;
-
           return (
             <div key={post.id} className="post-row">
               <div className="post-row-info">
                 <h3>{post.title}</h3>
                 <span
-                  className={`post-status ${
-                    post.published ? "published" : "draft"
-                  }`}
+                  className={`post-status ${post.published ? "published" : "draft"}`}
                 >
                   {post.published ? "Published" : "Draft"}
                 </span>
               </div>
-
               <div className="post-row-actions">
                 <button
-                  className="btn-toggle"
+                  className="btn btn-toggle"
                   onClick={() => togglePublish(post.id)}
                   disabled={isProcessing}
                 >
                   {isProcessing ? "Updating..." : "Toggle"}
                 </button>
-
                 <button
-                  className="btn-delete"
+                  className="btn btn-delete"
                   onClick={() => deletePost(post.id)}
                   disabled={isProcessing}
                 >

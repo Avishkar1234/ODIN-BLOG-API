@@ -9,80 +9,103 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 0.5px solid var(--color-border-tertiary, #e5e7eb);
   padding-bottom: 1rem;
 }
 
 .dashboard-header h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #111;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-text-primary, #111);
 }
 
-.dashboard-header-actions {
-  display: flex;
-  gap: 0.75rem;
+.btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    opacity 0.15s;
 }
 
-.btn-create {
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-new {
   background-color: #2563eb;
   color: #fff;
+  border-color: #2563eb;
 }
 
-.btn-create:hover {
+.btn-new:hover {
   background-color: #1d4ed8;
 }
 
-.btn-logout {
-  background-color: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
+.btn-toggle {
+  background: var(--color-background-secondary, #f3f4f6);
+  color: var(--color-text-secondary, #374151);
+  border-color: var(--color-border-tertiary, #d1d5db);
 }
 
-.btn-logout:hover {
-  background-color: #e5e7eb;
+.btn-toggle:hover:not(:disabled) {
+  background: var(--color-background-tertiary, #e5e7eb);
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: #fecaca;
 }
 
 .post-row {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 1.1rem 1.25rem;
-  margin-bottom: 1rem;
+  background: var(--color-background-primary, #fff);
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  transition: box-shadow 0.2s;
+  transition: border-color 0.15s;
 }
 
 .post-row:hover {
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  border-color: var(--color-border-secondary, #d1d5db);
 }
 
 .post-row-info h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111;
-  margin-bottom: 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-primary, #111);
+  margin-bottom: 0.3rem;
 }
 
 .post-status {
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.15rem 0.55rem;
   border-radius: 999px;
   display: inline-block;
 }
 
 .post-status.published {
   background-color: #dcfce7;
-  color: #16a34a;
+  color: #15803d;
 }
 
 .post-status.draft {
-  background-color: #f3f4f6;
-  color: #6b7280;
+  background-color: var(--color-background-secondary, #f3f4f6);
+  color: var(--color-text-secondary, #6b7280);
 }
 
 .post-row-actions {
@@ -91,28 +114,9 @@
   flex-shrink: 0;
 }
 
-.btn-toggle {
-  background-color: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
-}
-
-.btn-toggle:hover {
-  background-color: #e5e7eb;
-}
-
-.btn-delete {
-  background-color: #fee2e2;
-  color: #dc2626;
-}
-
-.btn-delete:hover {
-  background-color: #fecaca;
-}
-
 .dashboard-empty {
   text-align: center;
-  color: #9ca3af;
+  color: var(--color-text-tertiary, #9ca3af);
   padding: 3rem 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
