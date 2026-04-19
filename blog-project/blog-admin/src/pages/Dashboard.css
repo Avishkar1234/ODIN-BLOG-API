@@ -9,14 +9,14 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
-  border-bottom: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  border-bottom: 1px solid #e5e7eb;
   padding-bottom: 1rem;
 }
 
 .dashboard-header h2 {
   font-size: 1.4rem;
   font-weight: 500;
-  color: var(--color-text-primary, #111);
+  color: #ffffff;
 }
 
 .btn {
@@ -24,7 +24,7 @@
   font-weight: 500;
   padding: 0.45rem 1rem;
   border-radius: 8px;
-  border: 0.5px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
   transition:
     background 0.15s,
@@ -47,13 +47,13 @@
 }
 
 .btn-toggle {
-  background: var(--color-background-secondary, #f3f4f6);
-  color: var(--color-text-secondary, #374151);
-  border-color: var(--color-border-tertiary, #d1d5db);
+  background: #f3f4f6;
+  color: #374151;
+  border-color: #d1d5db;
 }
 
 .btn-toggle:hover:not(:disabled) {
-  background: var(--color-background-tertiary, #e5e7eb);
+  background: #e5e7eb;
 }
 
 .btn-delete {
@@ -67,8 +67,8 @@
 }
 
 .post-row {
-  background: var(--color-background-primary, #fff);
-  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  background: #fff;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 1rem 1.25rem;
   margin-bottom: 0.75rem;
@@ -80,13 +80,13 @@
 }
 
 .post-row:hover {
-  border-color: var(--color-border-secondary, #d1d5db);
+  border-color: #d1d5db;
 }
 
 .post-row-info h3 {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-text-primary, #111);
+  color: #111;
   margin-bottom: 0.3rem;
 }
 
@@ -104,8 +104,8 @@
 }
 
 .post-status.draft {
-  background-color: var(--color-background-secondary, #f3f4f6);
-  color: var(--color-text-secondary, #6b7280);
+  background-color: #f3f4f6;
+  color: #6b7280;
 }
 
 .post-row-actions {
@@ -116,7 +116,7 @@
 
 .dashboard-empty {
   text-align: center;
-  color: var(--color-text-tertiary, #9ca3af);
+  color: #9ca3af;
   padding: 3rem 0;
   font-size: 0.95rem;
 }
