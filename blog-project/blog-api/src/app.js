@@ -1,4 +1,7 @@
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const cors = require("cors");
 
@@ -9,17 +12,21 @@ const commentRoutes = require("./routes/commentRoutes.js");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.CLIENT_URL, // add this in Render's environment variables
-].filter(Boolean);
+  "http://localhost:5174",
+  "https://odin-blog-api-liart.vercel.app",
+  "https://odin-blog-api-k5cr.vercel.app",
+];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow Postman/curl
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 
