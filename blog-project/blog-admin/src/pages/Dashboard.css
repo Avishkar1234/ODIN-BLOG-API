@@ -16,7 +16,7 @@
 .dashboard-header h2 {
   font-size: 1.4rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .btn {
