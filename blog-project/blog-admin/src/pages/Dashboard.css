@@ -16,10 +16,13 @@
   padding-bottom: 1rem;
 }
 
+/* !important needed to override global h2 rule in index.css */
 .dashboard-header h2 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: #ffffff;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  letter-spacing: -0.3px;
 }
 
 /* ── Stat cards ── */
@@ -133,11 +136,13 @@
   border-color: rgba(79, 110, 247, 0.4);
 }
 
+/* !important needed to override global h2/h3 rules in index.css */
 .post-row-info h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #fff;
-  margin-bottom: 0.4rem;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  margin-bottom: 0.4rem !important;
+  letter-spacing: normal !important;
 }
 
 /* ── Status badges ── */
@@ -185,7 +190,7 @@
   font-size: 0.95rem;
 }
 
-/* ── Page background (apply to your root/body) ── */
+/* ── Page background ── */
 .dashboard-page {
   background: #0f1117;
   min-height: 100vh;
