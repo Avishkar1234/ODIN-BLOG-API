@@ -15,11 +15,13 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://odin-blog-api-liart.vercel.app",
   "https://odin-blog-api-k5cr.vercel.app",
-];
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
+      console.log("Request origin:", origin);
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(new Error("Not allowed by CORS"));
