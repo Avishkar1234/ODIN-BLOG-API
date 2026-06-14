@@ -8,9 +8,9 @@ A full-stack blog platform built with React, Node.js, Express, and PostgreSQL. T
 
 | App | URL |
 |-----|-----|
-| 🛠️ Admin Dashboard | [odin-blog-api-k5cr.vercel.app](https://odin-blog-api-k5cr.vercel.app) |
-| 🌐 Blog Client | [client-odin-blog-api-liart.vercel.app](https://odin-blog-api-liart.vercel.app/) |
-| ⚙️ Backend API | [odin-blog-api-si1t.onrender.com](https://odin-blog-api-si1t.onrender.com) |
+| 🛠️ Admin Dashboard | [odin-blog-api-k5cr.vercel.app](odin-blog-api-k5cr.vercel.app) |
+| 🌐 Blog Client | [client-odin-blog-api-liart.vercel.app](odin-blog-api-liart.vercel.app) |
+| ⚙️ Backend API | [odin-blog-api-si1t.onrender.com](odin-blog-api-c1b4.vercel.app) |
 
 ---
 
