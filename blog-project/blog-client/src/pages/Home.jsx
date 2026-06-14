@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../api/axios";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
-import React from "react";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -13,46 +12,46 @@ function Home() {
     const fetchPosts = async () => {
       try {
         const res = await API.get("/api/posts");
-        setPosts(res.data);
+        const data = res.data;
+        setPosts(Array.isArray(data) ? data : (data.posts ?? data.data ?? []));
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load posts");
       } finally {
         setLoading(false);
       }
     };
-
     fetchPosts();
   }, []);
 
-  if (loading) return <p style={{ padding: "2rem" }}>Loading posts...</p>;
+  if (loading) return <p className="loading-state">Loading posts…</p>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Published Posts</h2>
+    <div className="home">
+      <div className="home-header">
+        <h2>Latest Posts</h2>
+        <p>Thoughts, ideas, and stories.</p>
+      </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>}
 
       {posts.length === 0 ? (
-        <p>No posts available.</p>
+        <div className="empty-state">
+          <p>No posts yet. Check back soon.</p>
+        </div>
       ) : (
-        posts.map((post) => (
-          <div
-            key={post.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "1rem",
-              marginBottom: "1rem",
-            }}
-          >
-            <h3>{post.title}</h3>
-            <p>
-              {post.content
-                ? post.content.slice(0, 120) + "..."
-                : "No content available"}
-            </p>
-            <Link to={`/post/${post.id}`}>Read More</Link>
-          </div>
-        ))
+        <div className="post-list">
+          {posts.map((post) => (
+            <div key={post.id} className="post-card">
+              <h3>{post.title}</h3>
+              <p>
+                {post.content
+                  ? post.content.slice(0, 140) + "…"
+                  : "No content available"}
+              </p>
+              <Link to={`/post/${post.id}`}>Read more →</Link>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

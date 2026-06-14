@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import API from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/Post.css";
@@ -22,27 +22,21 @@ function Post() {
         setError(err.response?.data?.message || "Post not found");
       }
     };
-
     fetchPost();
   }, [id]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
     if (!comment.trim()) return;
-
     setLoadingComment(true);
-
     try {
       const res = await API.post(`/api/posts/${id}/comments`, {
         content: comment,
       });
-
       setPost((prev) => ({
         ...prev,
         comments: [...(prev.comments ?? []), res.data],
       }));
-
       setComment("");
     } catch (err) {
       alert(err.response?.data?.message || "Failed to add comment");
@@ -51,43 +45,79 @@ function Post() {
     }
   };
 
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (!post) return <p>Loading...</p>;
+  if (error)
+    return (
+      <div className="post-page">
+        <p className="post-error">{error}</p>
+      </div>
+    );
+
+  if (!post)
+    return (
+      <div className="post-page">
+        <p className="post-loading">Loading post…</p>
+      </div>
+    );
+
+  const comments = post.comments ?? [];
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
+    <div className="post-page">
+      <Link to="/" className="post-back">
+        ← Back to posts
+      </Link>
 
-      <hr />
+      <article className="post-article">
+        <h1 className="post-title">{post.title}</h1>
+        {post.author && <p className="post-meta">By {post.author.username}</p>}
+        <p className="post-content">{post.content}</p>
+      </article>
 
-      <h3>Comments</h3>
+      <section className="comments-section">
+        <h2 className="comments-heading">
+          {comments.length > 0
+            ? `${comments.length} Comment${comments.length !== 1 ? "s" : ""}`
+            : "Comments"}
+        </h2>
 
-      {(post.comments ?? []).length === 0 && <p>No comments yet</p>}
+        {comments.length === 0 && (
+          <p className="no-comments">No comments yet. Be the first!</p>
+        )}
 
-      {(post.comments ?? []).map((c) => (
-        <div key={c.id} style={{ marginBottom: "1rem" }}>
-          <strong>{c.author?.username ?? "Anonymous"}</strong>
-          <p>{c.content}</p>
+        <div className="comment-list">
+          {comments.map((c) => (
+            <div key={c.id} className="comment-item">
+              <span className="comment-author">
+                {c.author?.username ?? "Anonymous"}
+              </span>
+              <p className="comment-content">{c.content}</p>
+            </div>
+          ))}
         </div>
-      ))}
 
-      {user ? (
-        <form onSubmit={handleCommentSubmit} style={{ marginTop: "1rem" }}>
-          <textarea
-            placeholder="Write a comment..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            rows={3}
-            style={{ width: "100%" }}
-          />
-          <button type="submit" disabled={loadingComment}>
-            {loadingComment ? "Posting..." : "Add Comment"}
-          </button>
-        </form>
-      ) : (
-        <p>Login to add a comment</p>
-      )}
+        {user ? (
+          <form className="comment-form" onSubmit={handleCommentSubmit}>
+            <textarea
+              placeholder="Share your thoughts…"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              rows={3}
+              className="comment-textarea"
+            />
+            <button
+              type="submit"
+              className="comment-submit"
+              disabled={loadingComment}
+            >
+              {loadingComment ? "Posting…" : "Post comment"}
+            </button>
+          </form>
+        ) : (
+          <p className="login-prompt">
+            <Link to="/login">Sign in</Link> to leave a comment
+          </p>
+        )}
+      </section>
     </div>
   );
 }

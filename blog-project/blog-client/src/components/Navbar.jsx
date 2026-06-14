@@ -1,49 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
+import "../styles/Navbar.css";
 
 function Navbar() {
-    const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const location = useLocation();
 
-    return (
-        <nav style={styles.nav}>
-            <h2 style={styles.logo}>Blog</h2>
+  return (
+    <header className="navbar">
+      <Link to="/" className="navbar-logo">
+        The Blog
+      </Link>
 
-            <div style={styles.links}>
-                <Link to="/">Home</Link>
+      <nav className="navbar-links">
+        <Link
+          to="/"
+          className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+        >
+          Home
+        </Link>
 
-                {user ? (
-                    <>
-                        <span>Welcome, {user.username}</span>
-                        <button onClick={logout}>Logout</button>
-                    </>
-                ) : (
-                    <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </>
-                )}
-            </div>
-        </nav>
-    );
+        {user ? (
+          <>
+            <span className="nav-username">Hi, {user.username}</span>
+            <button className="nav-btn" onClick={logout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className={`nav-link ${location.pathname === "/login" ? "active" : ""}`}
+            >
+              Login
+            </Link>
+            <Link to="/register" className="nav-btn-primary">
+              Register
+            </Link>
+          </>
+        )}
+      </nav>
+    </header>
+  );
 }
-
-const styles = {
-    nav: {
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "1rem 2rem",
-        borderBottom: "1px solid #ccc",
-    },
-    logo: {
-        margin: 0,
-    },
-    links: {
-        display: "flex",
-        gap: "1rem",
-    },
-};
 
 export default Navbar;
