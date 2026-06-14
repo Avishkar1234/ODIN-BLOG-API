@@ -79,3 +79,15 @@
   padding: 0.5rem 0.75rem;
   text-align: center;
 }
+
+.auth-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--accent);
+  font-weight: 500;
+}

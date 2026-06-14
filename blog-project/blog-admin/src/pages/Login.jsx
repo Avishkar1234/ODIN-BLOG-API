@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
 import { AuthContext } from "../context/AuthContext.js";
@@ -76,6 +76,10 @@ function Login() {
             {loading ? "Signing in…" : "Sign in"}
           </button>
         </form>
+
+        <p className="auth-footer">
+          Need an account? <a href="/register">Create admin</a>
+        </p>
       </div>
     </div>
   );
