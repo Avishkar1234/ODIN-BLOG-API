@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcyrpt.hash(password, 10);
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         email,
         username,
@@ -83,6 +83,9 @@ exports.getCurrentUser = async (req, res) => {
 exports.registerAdmin = async (req, res) => {
   try {
     const { email, username, password, adminSecret } = req.body;
+
+    console.log("Received secret:", JSON.stringify(adminSecret));
+    console.log("Expected secret:", JSON.stringify(process.env.ADMIN_SECRET));
 
     if (adminSecret !== process.env.ADMIN_SECRET) {
       return res.status(403).json({ message: "Invalid admin secret" });
