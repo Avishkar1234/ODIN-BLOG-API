@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
-import { AuthContext } from "../context/AuthContext.js";
+import { AuthContext } from "../context/AuthContext.jsx";
 import "./Auth.css";
 
 function Login() {
@@ -25,7 +25,6 @@ function Login() {
       });
 
       const token = res.data?.token;
-
       if (!token) {
         setError("Invalid response from server");
         return;
@@ -44,29 +43,38 @@ function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <h2>Admin Login</h2>
+        <p className="auth-subtitle">Sign in to manage your blog</p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="admin@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-          <button className="btn-auth" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
           {error && <p className="auth-error">{error}</p>}
+
+          <button type="submit" className="btn-auth" disabled={loading}>
+            {loading ? "Signing in…" : "Sign in"}
+          </button>
         </form>
       </div>
     </div>
