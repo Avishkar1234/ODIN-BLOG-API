@@ -15,6 +15,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://odin-blog-api-liart.vercel.app",
   "https://odin-blog-api-k5cr.vercel.app",
+  "https://odin-blog-api-k5cr-git-main-avishkar1234s-projects.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
@@ -22,8 +23,14 @@ app.use(
   cors({
     origin: function (origin, callback) {
       console.log("Request origin:", origin);
+
       if (!origin) return callback(null, true);
+
+      // FIX: The deployed admin app is served from this Vercel origin.
+      // It must be explicitly allowed so browser requests to the API
+      // receive a valid Access-Control-Allow-Origin response header.
       if (allowedOrigins.includes(origin)) return callback(null, true);
+
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
