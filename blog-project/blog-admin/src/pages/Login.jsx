@@ -45,12 +45,14 @@ function Login() {
         <h2>Admin Login</h2>
         <p className="auth-subtitle">Sign in to manage your blog</p>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form" onSubmit={handleSubmit} autoComplete="on">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
               id="email"
+              name="email"
               type="email"
+              autoComplete="username"
               placeholder="admin@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +64,9 @@ function Login() {
             <label htmlFor="password">Password</label>
             <input
               id="password"
+              name="password"
               type="password"
+              autoComplete="current-password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
